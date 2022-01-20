@@ -6,6 +6,16 @@ Terraform module which deploys Jet Stack Cert Manager
 [![LICENSE](https://img.shields.io/github/license/bailey84j/terraform-kubernetes-jetstack-certmanager)](https://github.com/bailey84j/terraform-kubernetes-jetstack-certmanager/blob/master/LICENSE)
 
 
+## Examples
+
+- [Standard](https://github.com/bailey84j/terraform-kubernetes-jetstack-certmanager/tree/master/examples/standard): Deploying jetstack certmanager using the default settings
+- [Custom](https://github.com/bailey84j/terraform-kubernetes-jetstack-certmanager/tree/master/examples/custom): Customising the deployment to use a different api_group, name and namespace 
+
+## Contributing
+
+Report issues/questions/feature requests via [issues](https://github.com/bailey84j/terraform-kubernetes-jetstack-certmanager/issues/new)
+Full contributing [guidelines are covered here](https://github.com/bailey84j/terraform-kubernetes-jetstack-certmanager/blob/master/.github/CONTRIBUTING.md)
+
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 
@@ -78,14 +88,14 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_api_group"></a> [api\_group](#input\_api\_group) | n/a | `string` | `"cert-manager.io"` | no |
-| <a name="input_kubernetes_version"></a> [kubernetes\_version](#input\_kubernetes\_version) | n/a | `string` | `"v1.6.1"` | no |
-| <a name="input_name"></a> [name](#input\_name) | n/a | `string` | `"cert-manager"` | no |
-| <a name="input_namespace"></a> [namespace](#input\_namespace) | n/a | `string` | `"cert-manager"` | no |
+| <a name="input_api_group"></a> [api\_group](#input\_api\_group) | The name of the API group to create | `string` | `"cert-manager.io"` | no |
+| <a name="input_kubernetes_version"></a> [kubernetes\_version](#input\_kubernetes\_version) | The kubernetes version the application is being deployed onto | `string` | `"v1.6.1"` | no |
+| <a name="input_name"></a> [name](#input\_name) | The name of the appliation being deployed | `string` | `"cert-manager"` | no |
+| <a name="input_namespace"></a> [namespace](#input\_namespace) | The namespace to deploy the appliation in | `string` | `"cert-manager"` | no |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| <a name="output_api_group"></a> [api\_group](#output\_api\_group) | n/a |
+| <a name="output_api_group"></a> [api\_group](#output\_api\_group) | The Kubernets API Group that has been created |
 <!-- END_TF_DOCS -->

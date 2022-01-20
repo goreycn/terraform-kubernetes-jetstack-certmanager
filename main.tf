@@ -1527,9 +1527,9 @@ resource "kubernetes_mutating_webhook_configuration" "cert_manager_webhook" {
     }
 
     rule {
-      api_groups   = ["${var.api_group}","acme.${var.api_group}"]
+      api_groups   = ["${var.api_group}", "acme.${var.api_group}"]
       api_versions = ["v1"]
-      operations = ["CREATE", "UPDATE"]
+      operations   = ["CREATE", "UPDATE"]
       resources    = ["*/*"]
     }
 
@@ -1574,9 +1574,9 @@ resource "kubernetes_validating_webhook_configuration" "cert_manager_webhook" {
     }
 
     rule {
-      api_groups   = ["${var.api_group}","acme.${var.api_group}"]
+      api_groups   = ["${var.api_group}", "acme.${var.api_group}"]
       api_versions = ["v1"]
-      operations = ["CREATE", "UPDATE"]
+      operations   = ["CREATE", "UPDATE"]
       resources    = ["*/*"]
     }
 
@@ -1602,4 +1602,3 @@ resource "kubernetes_validating_webhook_configuration" "cert_manager_webhook" {
     admission_review_versions = ["v1", "v1beta1"]
   }
 }
-
