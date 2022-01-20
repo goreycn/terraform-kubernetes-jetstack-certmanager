@@ -1,17 +1,21 @@
 variable "api_group" {
-  default = "cert-manager.io"
+  description = "The name of the API group to create"
+  default     = "cert-manager.io"
 }
 
 variable "name" {
-    default = "cert-manager"
+  description = "The name of the appliation being deployed"
+  default     = "cert-manager"
 }
 
 variable "namespace" {
-    default = "cert-manager"
+  description = "The namespace to deploy the appliation in"
+  default     = "cert-manager"
 }
 
 variable "kubernetes_version" {
-    default = "v1.6.1"
+  description = "The kubernetes version the application is being deployed onto"
+  default     = "v1.6.1"
 }
 
 

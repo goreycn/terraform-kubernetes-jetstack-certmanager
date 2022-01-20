@@ -1,5 +1,5 @@
 locals {
-   # Your AWS EKS Cluster ID goes here.
+  # Your AWS EKS Cluster ID goes here.
   k8s_cluster_name = "my-k8s-cluster"
 }
 
@@ -13,7 +13,7 @@ data "aws_eks_cluster" "eks" {
 
 data "aws_eks_cluster_auth" "eks" {
   name = local.k8s_cluster_name
-  
+
 }
 
 provider "kubernetes" {

@@ -3,15 +3,15 @@ variable "api_group" {
 }
 
 variable "name" {
-    default = "cert-manager"
+  default = "cert-manager"
 }
 
 variable "namespace" {
-    default = "cert-manager"
+  default = "cert-manager"
 }
 
 variable "kubernetes_version" {
-    default = "v1.6.1"
+  default = "v1.6.1"
 }
 
 

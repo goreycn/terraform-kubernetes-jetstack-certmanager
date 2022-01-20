@@ -6,6 +6,16 @@ Terraform module which deploys Jet Stack Cert Manager
 [![LICENSE](https://img.shields.io/github/license/bailey84j/terraform-kubernetes-jetstack-certmanager)](https://github.com/bailey84j/terraform-kubernetes-jetstack-certmanager/blob/master/LICENSE)
 
 
+## Examples
+
+- [Standard](https://github.com/bailey84j/terraform-kubernetes-jetstack-certmanager/tree/master/examples/standard): Deploying jetstack certmanager using the default settings
+- [Custom](https://github.com/bailey84j/terraform-kubernetes-jetstack-certmanager/tree/master/examples/custom): Customising the deployment to use a different api_group, name and namespace 
+
+## Contributing
+
+Report issues/questions/feature requests via [issues](https://github.com/bailey84j/terraform-kubernetes-jetstack-certmanager/issues/new)
+Full contributing [guidelines are covered here](https://github.com/bailey84j/terraform-kubernetes-jetstack-certmanager/blob/master/.github/CONTRIBUTING.md)
+
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 
