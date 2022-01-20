@@ -17,6 +17,4 @@ variable "kubernetes_version" {
   description = "The kubernetes version the application is being deployed onto"
   default     = "v1.6.1"
 }
-
-
  

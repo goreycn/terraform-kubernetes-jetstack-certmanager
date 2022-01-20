@@ -13,6 +13,4 @@ variable "namespace" {
 variable "kubernetes_version" {
   default = "v1.6.1"
 }
-
-
  

@@ -4,7 +4,7 @@ locals {
 }
 
 provider "aws" {
-  region = var.region
+  region = "us-west-1"
 }
 
 data "aws_eks_cluster" "eks" {

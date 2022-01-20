@@ -1602,4 +1602,3 @@ resource "kubernetes_validating_webhook_configuration" "cert_manager_webhook" {
     admission_review_versions = ["v1", "v1beta1"]
   }
 }
-
