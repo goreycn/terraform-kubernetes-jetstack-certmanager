@@ -88,14 +88,14 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_api_group"></a> [api\_group](#input\_api\_group) | n/a | `string` | `"cert-manager.io"` | no |
-| <a name="input_kubernetes_version"></a> [kubernetes\_version](#input\_kubernetes\_version) | n/a | `string` | `"v1.6.1"` | no |
-| <a name="input_name"></a> [name](#input\_name) | n/a | `string` | `"cert-manager"` | no |
-| <a name="input_namespace"></a> [namespace](#input\_namespace) | n/a | `string` | `"cert-manager"` | no |
+| <a name="input_api_group"></a> [api\_group](#input\_api\_group) | The name of the API group to create | `string` | `"cert-manager.io"` | no |
+| <a name="input_kubernetes_version"></a> [kubernetes\_version](#input\_kubernetes\_version) | The kubernetes version the application is being deployed onto | `string` | `"v1.6.1"` | no |
+| <a name="input_name"></a> [name](#input\_name) | The name of the appliation being deployed | `string` | `"cert-manager"` | no |
+| <a name="input_namespace"></a> [namespace](#input\_namespace) | The namespace to deploy the appliation in | `string` | `"cert-manager"` | no |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| <a name="output_api_group"></a> [api\_group](#output\_api\_group) | n/a |
+| <a name="output_api_group"></a> [api\_group](#output\_api\_group) | The Kubernets API Group that has been created |
 <!-- END_TF_DOCS -->
