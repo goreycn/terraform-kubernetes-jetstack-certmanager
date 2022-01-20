@@ -1,6 +1,5 @@
 # Custom Jetstack Cert Manager Deployment
 
-
 Deploying JetStack Cert Manager using the customised settings:
 
 
