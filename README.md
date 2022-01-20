@@ -1,4 +1,11 @@
 # terraform-kubernetes-jetstack-certmanager
+
+Terraform module which deploys Jet Stack Cert Manager
+
+[![Lint Status](https://github.com/bailey84j/terraform-kubernetes-jetstack-certmanager/actions/workflows/main.yml/badge.svg)](https://github.com/bailey84j/terraform-kubernetes-jetstack-certmanager/actions/workflows/main.yml)
+[![LICENSE](https://img.shields.io/github/license/bailey84j/terraform-kubernetes-jetstack-certmanager)](https://github.com/bailey84j/terraform-kubernetes-jetstack-certmanager/blob/master/LICENSE)
+
+
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 
