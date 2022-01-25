@@ -73,7 +73,7 @@ No modules.
 | [kubernetes_manifest.crd_issuers_cert_manager_io](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/manifest) | resource |
 | [kubernetes_manifest.crd_orders_acme_cert_manager_io](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/manifest) | resource |
 | [kubernetes_mutating_webhook_configuration.cert_manager_webhook](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/mutating_webhook_configuration) | resource |
-| [kubernetes_namespace.cert_manager](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/namespace) | resource |
+| [kubernetes_namespace.this](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/namespace) | resource |
 | [kubernetes_role.cert_manager_cainjector_leaderelection](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/role) | resource |
 | [kubernetes_role.cert_manager_leaderelection](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/role) | resource |
 | [kubernetes_role.cert_manager_webhook_dynamic_serving](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/role) | resource |
@@ -92,6 +92,7 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_api_group"></a> [api\_group](#input\_api\_group) | The name of the API group to create | `string` | `"cert-manager.io"` | no |
+| <a name="input_create_namespace"></a> [create\_namespace](#input\_create\_namespace) | Determines whether to create a new kubernetes namespace for the jetstack certmanager deployment | `bool` | `false` | no |
 | <a name="input_kubernetes_version"></a> [kubernetes\_version](#input\_kubernetes\_version) | The kubernetes version the application is being deployed onto | `string` | `"v1.6.1"` | no |
 | <a name="input_name"></a> [name](#input\_name) | The name of the appliation being deployed | `string` | `"cert-manager"` | no |
 | <a name="input_namespace"></a> [namespace](#input\_namespace) | The namespace to deploy the appliation in | `string` | `"cert-manager"` | no |
