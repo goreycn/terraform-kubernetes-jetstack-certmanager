@@ -1,8 +1,10 @@
-resource "kubernetes_namespace" "cert_manager" {
+resource "kubernetes_namespace" "this" {
+  count = var.create_namespace && var.namespace != "kube-system" ? 1 : 0
   metadata {
-    name = var.name
+    name = var.namespace
   }
 }
+
 
 resource "kubernetes_service_account" "cert_manager_cainjector" {
   metadata {

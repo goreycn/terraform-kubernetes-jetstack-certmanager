@@ -27,6 +27,8 @@ module "jetstack_certmanager" {
   source = "../../"
 
   api_group = "different_apigroup.io"
+  
+  create_namespace = true
 
   name = "different-app-name"
 
