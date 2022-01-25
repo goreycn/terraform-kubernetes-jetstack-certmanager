@@ -2,14 +2,18 @@
 
 Terraform module which deploys Jet Stack Cert Manager
 
-[![Lint Status](https://github.com/bailey84j/terraform-kubernetes-jetstack-certmanager/actions/workflows/main.yml/badge.svg)](https://github.com/bailey84j/terraform-kubernetes-jetstack-certmanager/actions/workflows/main.yml)
+[![tflint](https://github.com/bailey84j/terraform-kubernetes-jetstack-certmanager/actions/workflows/tflint.yml/badge.svg)](https://github.com/bailey84j/terraform-kubernetes-jetstack-certmanager/actions/workflows/tflint.yml)
 [![LICENSE](https://img.shields.io/github/license/bailey84j/terraform-kubernetes-jetstack-certmanager)](https://github.com/bailey84j/terraform-kubernetes-jetstack-certmanager/blob/master/LICENSE)
+[![Terraform](https://img.shields.io/badge/tf->%3D0.14.8-blue.svg)](https://www.terraform.io/downloads)
 
 
 ## Examples
 
-- [Standard](https://github.com/bailey84j/terraform-kubernetes-jetstack-certmanager/tree/master/examples/standard): Deploying jetstack certmanager using the default settings
-- [Custom](https://github.com/bailey84j/terraform-kubernetes-jetstack-certmanager/tree/master/examples/custom): Customising the deployment to use a different api_group, name and namespace 
+| Example | Description | Status|
+|---------|-------------|-------|
+| [Standard](https://github.com/bailey84j/terraform-kubernetes-jetstack-certmanager/tree/master/examples/standard) | Deploying jetstack certmanager using the default settings | [![Standard-Deployment](https://github.com/bailey84j/terraform-kubernetes-jetstack-certmanager/actions/workflows/standard-deployment.yml/badge.svg)](https://github.com/bailey84j/terraform-kubernetes-jetstack-certmanager/actions/workflows/standard-deployment.yml) 
+| [Custom](https://github.com/bailey84j/terraform-kubernetes-jetstack-certmanager/tree/master/examples/custom) | Customising the deployment to use a different api_group, name and namespace |[![Custom-Deployment](https://github.com/bailey84j/terraform-kubernetes-jetstack-certmanager/actions/workflows/custom-deployment.yml/badge.svg)](https://github.com/bailey84j/terraform-kubernetes-jetstack-certmanager/actions/workflows/custom-deployment.yml)
+
 
 ## Contributing
 
@@ -70,7 +74,7 @@ No modules.
 | [kubernetes_manifest.crd_issuers_cert_manager_io](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/manifest) | resource |
 | [kubernetes_manifest.crd_orders_acme_cert_manager_io](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/manifest) | resource |
 | [kubernetes_mutating_webhook_configuration.cert_manager_webhook](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/mutating_webhook_configuration) | resource |
-| [kubernetes_namespace.cert_manager](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/namespace) | resource |
+| [kubernetes_namespace.this](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/namespace) | resource |
 | [kubernetes_role.cert_manager_cainjector_leaderelection](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/role) | resource |
 | [kubernetes_role.cert_manager_leaderelection](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/role) | resource |
 | [kubernetes_role.cert_manager_webhook_dynamic_serving](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/role) | resource |
@@ -89,6 +93,7 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_api_group"></a> [api\_group](#input\_api\_group) | The name of the API group to create | `string` | `"cert-manager.io"` | no |
+| <a name="input_create_namespace"></a> [create\_namespace](#input\_create\_namespace) | Determines whether to create a new kubernetes namespace for the jetstack certmanager deployment | `bool` | `false` | no |
 | <a name="input_kubernetes_version"></a> [kubernetes\_version](#input\_kubernetes\_version) | The kubernetes version the application is being deployed onto | `string` | `"v1.6.1"` | no |
 | <a name="input_name"></a> [name](#input\_name) | The name of the appliation being deployed | `string` | `"cert-manager"` | no |
 | <a name="input_namespace"></a> [namespace](#input\_namespace) | The namespace to deploy the appliation in | `string` | `"cert-manager"` | no |

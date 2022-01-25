@@ -10,6 +10,12 @@ variable "name" {
   default     = "cert-manager"
 }
 
+variable "create_namespace" {
+  description = "Determines whether to create a new kubernetes namespace for the jetstack certmanager deployment"
+  type        = bool
+  default     = false
+}
+
 variable "namespace" {
   description = "The namespace to deploy the appliation in"
   type        = string
