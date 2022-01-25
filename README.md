@@ -4,6 +4,7 @@ Terraform module which deploys Jet Stack Cert Manager
 
 [![tflint](https://github.com/bailey84j/terraform-kubernetes-jetstack-certmanager/actions/workflows/tflint.yml/badge.svg)](https://github.com/bailey84j/terraform-kubernetes-jetstack-certmanager/actions/workflows/tflint.yml)
 [![LICENSE](https://img.shields.io/github/license/bailey84j/terraform-kubernetes-jetstack-certmanager)](https://github.com/bailey84j/terraform-kubernetes-jetstack-certmanager/blob/master/LICENSE)
+[![Terraform](https://img.shields.io/badge/tf->%3D0.14.8-blue.svg)](https://www.terraform.io/downloads)
 
 
 ## Examples
@@ -12,7 +13,7 @@ Terraform module which deploys Jet Stack Cert Manager
 |---------|-------------|-------|
 | [Standard](https://github.com/bailey84j/terraform-kubernetes-jetstack-certmanager/tree/master/examples/standard) | Deploying jetstack certmanager using the default settings | [![Standard-Deployment](https://github.com/bailey84j/terraform-kubernetes-jetstack-certmanager/actions/workflows/standard-deployment.yml/badge.svg)](https://github.com/bailey84j/terraform-kubernetes-jetstack-certmanager/actions/workflows/standard-deployment.yml) 
 | [Custom](https://github.com/bailey84j/terraform-kubernetes-jetstack-certmanager/tree/master/examples/custom) | Customising the deployment to use a different api_group, name and namespace |[![Custom-Deployment](https://github.com/bailey84j/terraform-kubernetes-jetstack-certmanager/actions/workflows/custom-deployment.yml/badge.svg)](https://github.com/bailey84j/terraform-kubernetes-jetstack-certmanager/actions/workflows/custom-deployment.yml)
-[![Terraform](https://img.shields.io/badge/tf->%3D0.14.8-blue.svg)](https://www.terraform.io/downloads)
+
 
 ## Contributing
 
