@@ -1,6 +1,6 @@
 locals {
   # Your AWS EKS Cluster ID goes here.
-  k8s_cluster_name = "my-k8s-cluster"
+  k8s_cluster_name = var.k8s_cluster_name
 }
 
 provider "aws" {
@@ -27,7 +27,7 @@ module "jetstack_certmanager" {
   source = "../../"
 
   api_group = "different_apigroup.io"
-  
+
   create_namespace = true
 
   name = "different-app-name"
