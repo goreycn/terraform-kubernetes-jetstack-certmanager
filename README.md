@@ -87,13 +87,14 @@ No modules.
 | [kubernetes_service_account.cert_manager_cainjector](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/service_account) | resource |
 | [kubernetes_service_account.cert_manager_webhook](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/service_account) | resource |
 | [kubernetes_validating_webhook_configuration.cert_manager_webhook](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/validating_webhook_configuration) | resource |
+| [kubernetes_namespace.this](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/data-sources/namespace) | data source |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_api_group"></a> [api\_group](#input\_api\_group) | The name of the API group to create | `string` | `"cert-manager.io"` | no |
-| <a name="input_create_namespace"></a> [create\_namespace](#input\_create\_namespace) | Determines whether to create a new kubernetes namespace for the jetstack certmanager deployment | `bool` | `false` | no |
+| <a name="input_create_namespace"></a> [create\_namespace](#input\_create\_namespace) | Determines whether to create a new kubernetes namespace for the jetstack certmanager deployment | `bool` | `true` | no |
 | <a name="input_kubernetes_version"></a> [kubernetes\_version](#input\_kubernetes\_version) | The kubernetes version the application is being deployed onto | `string` | `"v1.6.1"` | no |
 | <a name="input_name"></a> [name](#input\_name) | The name of the appliation being deployed | `string` | `"cert-manager"` | no |
 | <a name="input_namespace"></a> [namespace](#input\_namespace) | The namespace to deploy the appliation in | `string` | `"cert-manager"` | no |
