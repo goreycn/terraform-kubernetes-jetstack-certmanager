@@ -1,15 +1,26 @@
 resource "kubernetes_namespace" "this" {
-  count = var.create_namespace && var.namespace != "kube-system" ? 1 : 0
+  count = var.create_namespace && !contains(local.default_namespaces, var.namespace) ? 1 : 0
   metadata {
     name = var.namespace
   }
+}
+
+data "kubernetes_namespace" "this" {
+  count = !var.create_namespace || contains(local.default_namespaces, var.namespace) ? 1 : 0
+  metadata {
+    name = var.namespace
+  }
+}
+
+locals {
+  default_namespaces = ["default", "kube-system"]
 }
 
 
 resource "kubernetes_service_account" "cert_manager_cainjector" {
   metadata {
     name      = "${var.name}-cainjector"
-    namespace = var.namespace
+    namespace = var.create_namespace && !contains(local.default_namespaces, var.namespace) ? kubernetes_namespace.this[0].metadata[0].name : data.kubernetes_namespace.this[0].metadata[0].name
 
     labels = {
       app = "cainjector"
@@ -30,7 +41,7 @@ resource "kubernetes_service_account" "cert_manager_cainjector" {
 resource "kubernetes_service_account" "cert_manager" {
   metadata {
     name      = var.name
-    namespace = var.namespace
+    namespace = var.create_namespace && !contains(local.default_namespaces, var.namespace) ? kubernetes_namespace.this[0].metadata[0].name : data.kubernetes_namespace.this[0].metadata[0].name
 
     labels = {
       app = var.name
@@ -51,7 +62,7 @@ resource "kubernetes_service_account" "cert_manager" {
 resource "kubernetes_service_account" "cert_manager_webhook" {
   metadata {
     name      = "${var.name}-webhook"
-    namespace = var.namespace
+    namespace = var.create_namespace && !contains(local.default_namespaces, var.namespace) ? kubernetes_namespace.this[0].metadata[0].name : data.kubernetes_namespace.this[0].metadata[0].name
 
     labels = {
       app = "webhook"
@@ -653,7 +664,7 @@ resource "kubernetes_cluster_role_binding" "cert_manager_cainjector" {
   subject {
     kind      = "ServiceAccount"
     name      = "${var.name}-cainjector"
-    namespace = var.namespace
+    namespace = var.create_namespace && !contains(local.default_namespaces, var.namespace) ? kubernetes_namespace.this[0].metadata[0].name : data.kubernetes_namespace.this[0].metadata[0].name
   }
 
   role_ref {
@@ -683,7 +694,7 @@ resource "kubernetes_cluster_role_binding" "cert_manager_controller_issuers" {
   subject {
     kind      = "ServiceAccount"
     name      = var.name
-    namespace = var.namespace
+    namespace = var.create_namespace && !contains(local.default_namespaces, var.namespace) ? kubernetes_namespace.this[0].metadata[0].name : data.kubernetes_namespace.this[0].metadata[0].name
   }
 
   role_ref {
@@ -713,7 +724,7 @@ resource "kubernetes_cluster_role_binding" "cert_manager_controller_clusterissue
   subject {
     kind      = "ServiceAccount"
     name      = var.name
-    namespace = var.namespace
+    namespace = var.create_namespace && !contains(local.default_namespaces, var.namespace) ? kubernetes_namespace.this[0].metadata[0].name : data.kubernetes_namespace.this[0].metadata[0].name
   }
 
   role_ref {
@@ -743,7 +754,7 @@ resource "kubernetes_cluster_role_binding" "cert_manager_controller_certificates
   subject {
     kind      = "ServiceAccount"
     name      = var.name
-    namespace = var.namespace
+    namespace = var.create_namespace && !contains(local.default_namespaces, var.namespace) ? kubernetes_namespace.this[0].metadata[0].name : data.kubernetes_namespace.this[0].metadata[0].name
   }
 
   role_ref {
@@ -773,7 +784,7 @@ resource "kubernetes_cluster_role_binding" "cert_manager_controller_orders" {
   subject {
     kind      = "ServiceAccount"
     name      = var.name
-    namespace = var.namespace
+    namespace = var.create_namespace && !contains(local.default_namespaces, var.namespace) ? kubernetes_namespace.this[0].metadata[0].name : data.kubernetes_namespace.this[0].metadata[0].name
   }
 
   role_ref {
@@ -803,7 +814,7 @@ resource "kubernetes_cluster_role_binding" "cert_manager_controller_challenges" 
   subject {
     kind      = "ServiceAccount"
     name      = var.name
-    namespace = var.namespace
+    namespace = var.create_namespace && !contains(local.default_namespaces, var.namespace) ? kubernetes_namespace.this[0].metadata[0].name : data.kubernetes_namespace.this[0].metadata[0].name
   }
 
   role_ref {
@@ -833,7 +844,7 @@ resource "kubernetes_cluster_role_binding" "cert_manager_controller_ingress_shim
   subject {
     kind      = "ServiceAccount"
     name      = var.name
-    namespace = var.namespace
+    namespace = var.create_namespace && !contains(local.default_namespaces, var.namespace) ? kubernetes_namespace.this[0].metadata[0].name : data.kubernetes_namespace.this[0].metadata[0].name
   }
 
   role_ref {
@@ -863,7 +874,7 @@ resource "kubernetes_cluster_role_binding" "cert_manager_controller_approve_cert
   subject {
     kind      = "ServiceAccount"
     name      = var.name
-    namespace = var.namespace
+    namespace = var.create_namespace && !contains(local.default_namespaces, var.namespace) ? kubernetes_namespace.this[0].metadata[0].name : data.kubernetes_namespace.this[0].metadata[0].name
   }
 
   role_ref {
@@ -893,7 +904,7 @@ resource "kubernetes_cluster_role_binding" "cert_manager_controller_certificates
   subject {
     kind      = "ServiceAccount"
     name      = var.name
-    namespace = var.namespace
+    namespace = var.create_namespace && !contains(local.default_namespaces, var.namespace) ? kubernetes_namespace.this[0].metadata[0].name : data.kubernetes_namespace.this[0].metadata[0].name
   }
 
   role_ref {
@@ -923,7 +934,7 @@ resource "kubernetes_cluster_role_binding" "cert_manager_webhook_subjectaccessre
   subject {
     kind      = "ServiceAccount"
     name      = "${var.name}-webhook"
-    namespace = var.namespace
+    namespace = var.create_namespace && !contains(local.default_namespaces, var.namespace) ? kubernetes_namespace.this[0].metadata[0].name : data.kubernetes_namespace.this[0].metadata[0].name
   }
 
   role_ref {
@@ -936,7 +947,7 @@ resource "kubernetes_cluster_role_binding" "cert_manager_webhook_subjectaccessre
 resource "kubernetes_role" "cert_manager_cainjector_leaderelection" {
   metadata {
     name      = "${var.name}-cainjector:leaderelection"
-    namespace = "kube-system"
+    namespace = var.create_namespace && !contains(local.default_namespaces, var.namespace) ? kubernetes_namespace.this[0].metadata[0].name : data.kubernetes_namespace.this[0].metadata[0].name
 
     labels = {
       app = "cainjector"
@@ -981,7 +992,7 @@ resource "kubernetes_role" "cert_manager_cainjector_leaderelection" {
 resource "kubernetes_role" "cert_manager_leaderelection" {
   metadata {
     name      = "${var.name}:leaderelection"
-    namespace = "kube-system"
+    namespace = var.create_namespace && !contains(local.default_namespaces, var.namespace) ? kubernetes_namespace.this[0].metadata[0].name : data.kubernetes_namespace.this[0].metadata[0].name
 
     labels = {
       app = var.name
@@ -1026,7 +1037,7 @@ resource "kubernetes_role" "cert_manager_leaderelection" {
 resource "kubernetes_role" "cert_manager_webhook_dynamic_serving" {
   metadata {
     name      = "${var.name}-webhook:dynamic-serving"
-    namespace = var.namespace
+    namespace = var.create_namespace && !contains(local.default_namespaces, var.namespace) ? kubernetes_namespace.this[0].metadata[0].name : data.kubernetes_namespace.this[0].metadata[0].name
 
     labels = {
       app = "webhook"
@@ -1058,7 +1069,7 @@ resource "kubernetes_role" "cert_manager_webhook_dynamic_serving" {
 resource "kubernetes_role_binding" "cert_manager_cainjector_leaderelection" {
   metadata {
     name      = "${var.name}-cainjector:leaderelection"
-    namespace = "kube-system"
+    namespace = var.create_namespace && !contains(local.default_namespaces, var.namespace) ? kubernetes_namespace.this[0].metadata[0].name : data.kubernetes_namespace.this[0].metadata[0].name
 
     labels = {
       app = "cainjector"
@@ -1076,7 +1087,7 @@ resource "kubernetes_role_binding" "cert_manager_cainjector_leaderelection" {
   subject {
     kind      = "ServiceAccount"
     name      = "${var.name}-cainjector"
-    namespace = var.namespace
+    namespace = var.create_namespace && !contains(local.default_namespaces, var.namespace) ? kubernetes_namespace.this[0].metadata[0].name : data.kubernetes_namespace.this[0].metadata[0].name
   }
 
   role_ref {
@@ -1089,7 +1100,7 @@ resource "kubernetes_role_binding" "cert_manager_cainjector_leaderelection" {
 resource "kubernetes_role_binding" "cert_manager_leaderelection" {
   metadata {
     name      = "${var.name}:leaderelection"
-    namespace = "kube-system"
+    namespace = var.create_namespace && !contains(local.default_namespaces, var.namespace) ? kubernetes_namespace.this[0].metadata[0].name : data.kubernetes_namespace.this[0].metadata[0].name
 
     labels = {
       app = var.name
@@ -1107,7 +1118,7 @@ resource "kubernetes_role_binding" "cert_manager_leaderelection" {
   subject {
     kind      = "ServiceAccount"
     name      = var.name
-    namespace = var.namespace
+    namespace = var.create_namespace && !contains(local.default_namespaces, var.namespace) ? kubernetes_namespace.this[0].metadata[0].name : data.kubernetes_namespace.this[0].metadata[0].name
   }
 
   role_ref {
@@ -1120,7 +1131,7 @@ resource "kubernetes_role_binding" "cert_manager_leaderelection" {
 resource "kubernetes_role_binding" "cert_manager_webhook_dynamic_serving" {
   metadata {
     name      = "${var.name}-webhook:dynamic-serving"
-    namespace = var.namespace
+    namespace = var.create_namespace && !contains(local.default_namespaces, var.namespace) ? kubernetes_namespace.this[0].metadata[0].name : data.kubernetes_namespace.this[0].metadata[0].name
 
     labels = {
       app = "webhook"
@@ -1138,7 +1149,7 @@ resource "kubernetes_role_binding" "cert_manager_webhook_dynamic_serving" {
   subject {
     kind      = "ServiceAccount"
     name      = "${var.name}-webhook"
-    namespace = var.namespace
+    namespace = var.create_namespace && !contains(local.default_namespaces, var.namespace) ? kubernetes_namespace.this[0].metadata[0].name : data.kubernetes_namespace.this[0].metadata[0].name
   }
 
   role_ref {
@@ -1151,7 +1162,7 @@ resource "kubernetes_role_binding" "cert_manager_webhook_dynamic_serving" {
 resource "kubernetes_service" "cert_manager" {
   metadata {
     name      = var.name
-    namespace = var.namespace
+    namespace = var.create_namespace && !contains(local.default_namespaces, var.namespace) ? kubernetes_namespace.this[0].metadata[0].name : data.kubernetes_namespace.this[0].metadata[0].name
 
     labels = {
       app = var.name
@@ -1189,7 +1200,7 @@ resource "kubernetes_service" "cert_manager" {
 resource "kubernetes_service" "cert_manager_webhook" {
   metadata {
     name      = "${var.name}-webhook"
-    namespace = var.namespace
+    namespace = var.create_namespace && !contains(local.default_namespaces, var.namespace) ? kubernetes_namespace.this[0].metadata[0].name : data.kubernetes_namespace.this[0].metadata[0].name
 
     labels = {
       app = "webhook"
@@ -1227,7 +1238,7 @@ resource "kubernetes_service" "cert_manager_webhook" {
 resource "kubernetes_deployment" "cert_manager_cainjector" {
   metadata {
     name      = "${var.name}-cainjector"
-    namespace = var.namespace
+    namespace = var.create_namespace && !contains(local.default_namespaces, var.namespace) ? kubernetes_namespace.this[0].metadata[0].name : data.kubernetes_namespace.this[0].metadata[0].name
 
     labels = {
       app = "cainjector"
@@ -1302,7 +1313,7 @@ resource "kubernetes_deployment" "cert_manager_cainjector" {
 resource "kubernetes_deployment" "cert_manager" {
   metadata {
     name      = var.name
-    namespace = var.namespace
+    namespace = var.create_namespace && !contains(local.default_namespaces, var.namespace) ? kubernetes_namespace.this[0].metadata[0].name : data.kubernetes_namespace.this[0].metadata[0].name
 
     labels = {
       app = var.name
@@ -1390,7 +1401,7 @@ resource "kubernetes_deployment" "cert_manager" {
 resource "kubernetes_deployment" "cert_manager_webhook" {
   metadata {
     name      = "${var.name}-webhook"
-    namespace = var.namespace
+    namespace = var.create_namespace && !contains(local.default_namespaces, var.namespace) ? kubernetes_namespace.this[0].metadata[0].name : data.kubernetes_namespace.this[0].metadata[0].name
 
     labels = {
       app = "webhook"
@@ -1522,7 +1533,7 @@ resource "kubernetes_mutating_webhook_configuration" "cert_manager_webhook" {
 
     client_config {
       service {
-        namespace = var.namespace
+        namespace = var.create_namespace && !contains(local.default_namespaces, var.namespace) ? kubernetes_namespace.this[0].metadata[0].name : data.kubernetes_namespace.this[0].metadata[0].name
         name      = "${var.name}-webhook"
         path      = "/mutate"
       }
@@ -1569,7 +1580,7 @@ resource "kubernetes_validating_webhook_configuration" "cert_manager_webhook" {
 
     client_config {
       service {
-        namespace = var.namespace
+        namespace = var.create_namespace && !contains(local.default_namespaces, var.namespace) ? kubernetes_namespace.this[0].metadata[0].name : data.kubernetes_namespace.this[0].metadata[0].name
         name      = "${var.name}-webhook"
         path      = "/validate"
       }

@@ -13,7 +13,7 @@ variable "name" {
 variable "create_namespace" {
   description = "Determines whether to create a new kubernetes namespace for the jetstack certmanager deployment"
   type        = bool
-  default     = false
+  default     = true
 }
 
 variable "namespace" {
